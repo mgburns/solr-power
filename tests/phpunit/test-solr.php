@@ -461,6 +461,7 @@ class SolrTest extends SolrTestBase {
 			's' => 'Movie',
 		);
 		$query = new WP_Query( $args );
+		var_dump($query->posts);
 
 		$this->assertEquals( array( $p_id2, $p_id ), wp_list_pluck( $query->posts, 'ID' ) );
 	}
@@ -504,6 +505,7 @@ class SolrTest extends SolrTestBase {
 			's' => 'Movie Reviews',
 		);
 		$query = new WP_Query( $args );
+		var_dump($query->posts);
 
 		$this->assertEquals( array( $p_id2, $p_id ), wp_list_pluck( $query->posts, 'ID' ) );
 	}

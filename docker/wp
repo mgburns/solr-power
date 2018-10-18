@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker run -it --rm \
+	--volumes-from solr-power_wordpress_1 \
+	--network container:solr-power_wordpress_1 \
+	--env-file docker/wp.env \
+	wordpress:cli "${@:version}"

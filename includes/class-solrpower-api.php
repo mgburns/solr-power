@@ -411,6 +411,7 @@ class SolrPower_Api {
 			$solr_boost_query = apply_filters( 'solr_boost_query', 'post_title^2 post_content^1.2' );
 			if ( false !== $solr_boost_query ) {
 				$dismax->setBoostFunctions( $solr_boost_query );
+				// $dismax->setQueryFields( $solr_boost_query );
 			}
 
 			/**
@@ -446,6 +447,7 @@ class SolrPower_Api {
 			$query->getHighlighting()->setHighlightMultiTerm( true );
 
 			$query->setQueryDefaultOperator( $default_operator );
+			$dismax->setMinimumMatch($default_operator === 'OR' ? '1' : '100%');
 
 			// Wildcards.
 			if ( strstr( $query->getQuery(), '*:*' ) ) {

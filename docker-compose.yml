@@ -1,0 +1,33 @@
+version: "3.5"
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/var/www/html/wp-content/plugins/solr-power
+    env_file: docker/wp.env
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/initdb/wordpress.sql.gz:/docker-entrypoint-initdb.d/wordpress.sql.gz
+      - db_data:/var/lib/mysql
+    environment:
+      # See https://hub.docker.com/_/mysql/
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  solr:
+    image: kshaner/solr:latest
+    volumes:
+      - ./schema.xml:/opt/apache-solr-3.6.2/example/solr/conf/schema.xml
+      - solr_data:/opt/apache-solr-3.6.2/example/solr
+    ports:
+      - 8983:8983
+
+volumes:
+  ? db_data
+  ? solr_data

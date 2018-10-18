@@ -18,7 +18,8 @@
         "solarium/solarium": "~4"
     },
     "require-dev": {
-        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master"
+        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
+        "phpunit/phpunit": "^6"
     },
     "autoload": {
         "classmap": [
